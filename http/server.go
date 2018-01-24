@@ -55,3 +55,16 @@ func (s *Server) Close() error {
 func (s *Server) Port() int {
   return s.ln.Addr().(*net.TCPAddr).Port
 }
+
+//Client represents a client to connect to the HTTP server
+type Client struct {
+  URL url.URL
+  userService UserService
+}
+
+//NewClient returns a new instance of Client
+func NewClient() *Client {
+  c := &ClientP{}
+  c.dialService.URL = &c.URL
+  return c
+}
