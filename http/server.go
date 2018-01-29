@@ -4,8 +4,8 @@ import (
   "net"
   "net/http"
   "os"
-  "net/url"
-  "github.com/james/TT"
+//  "net/url"
+ // "github.com/james/TT"
 )
 
 //return the default address
@@ -59,7 +59,7 @@ func (s *Server) Port() int {
 }
 
 //Client represents a client to connect to the HTTP server
-type Client struct {
+/*type Client struct {
   URL url.URL
   userService UserService
 }
@@ -73,4 +73,4 @@ func NewClient() *Client {
 
 func (c *Client) UserService() tt.UserService {
   return &c.userService
-}
+}*/
