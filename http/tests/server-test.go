@@ -1,26 +1,11 @@
-package http
+package http_test
 
 import (
-
-  "errors"
-  "log"
+  "fmt"
+  "net/url"
   "testing"
-
-  "github.com/james/tt"
-  "github.com/james/tt/http"
-  "github.com/james/tt/mock"
-
+  "github.com/james/TT/http"
 )
-
-func TestUserService_CreateUser(t *testing.T) {
-  t.Run("OK", testUserService_CreateUser)
-}
-
-func testUserService_CreateUser(t *testing.T) {
-  s, c := MustOpenServerClient()
-  defer s.Close()
-
-}
 
 type Server struct {
   *http.Server
@@ -31,8 +16,8 @@ type Server struct {
 //NewServer returns a new instance of Server.
 func NewServer() *Server {
   s := &Server {
-    Server: http.NewServer()
-    Handler: NewHandler()
+    Server: http.NewServer(),
+    Handler: NewHandler(),
   }
   s.Server.Handler = s.Handler.Handler
 

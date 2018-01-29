@@ -4,6 +4,8 @@ import (
   "net"
   "net/http"
   "os"
+  "net/url"
+  "github.com/james/TT"
 )
 
 //return the default address
@@ -64,7 +66,11 @@ type Client struct {
 
 //NewClient returns a new instance of Client
 func NewClient() *Client {
-  c := &ClientP{}
-  c.dialService.URL = &c.URL
+  c := &Client{}
+  c.userService.URL = &c.URL
   return c
+}
+
+func (c *Client) UserService() tt.UserService {
+  return &c.userService
 }
