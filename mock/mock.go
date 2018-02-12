@@ -1,7 +1,7 @@
 package mock
 
 import (
-	"github.com/james/tt"
+	"github.com/james/TT"
 )
 
 type UserService struct {

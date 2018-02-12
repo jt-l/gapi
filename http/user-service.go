@@ -7,6 +7,8 @@ import (
   "encoding/json"
   "os"
   "net/http"
+  "net/url"
+  "bytes"
 )
 
 //UserHandler represents an HTTP handler for users
@@ -56,4 +58,43 @@ type postUserRequest struct {
 type postUserResponse struct {
   User *tt.User `json:"User, omitempty"`
   Err string `json:"Err, omitempty"`
+}
+
+var _ tt.UserService = &UserService{}
+
+type UserService struct {
+  URL *url.URL
+}
+
+func (s *UserService) CreateUser(user *tt.User) error {
+  if user == nil {
+    return tt.ErrUserRequired
+  }
+  u := *s.URL
+  u.Path = "/api/user/"
+
+  token := user.Token
+  name := user.Name
+
+  reqBody, err := json.Marshal(postUserRequest{User: user, Token: token})
+  if err != nil {
+    return err
+  }
+
+  resp, err := http.Post(u.String(), "application/json", bytes.NewReader(reqBody))
+  if err != nil {
+    return err
+  }
+  defer resp.Body.Close()
+
+  var respBody postUserResponse
+  if err := json.NewDecoder(resp.Body).Decode(&respBody); err != nil {
+    return err
+  } else if respBody.Err != "" {
+    return tt.Error(respBody.Err)
+  }
+  *user = *respBody.User
+  user.Name = name
+  user.Token = token
+  return nil
 }
