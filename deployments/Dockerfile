@@ -1,7 +1,5 @@
 FROM iron/go:dev
 
-#ENV PATH=/Users/james/go/src/github.com/james/TT
-
 WORKDIR /app
 
 ADD . /go/src/github.com/james/TT 
