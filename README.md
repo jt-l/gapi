@@ -1,6 +1,6 @@
 Go API
 
-This is a Golang API that is based on a hexigonal architecture style. 
+This is a Golang API that is based on a <href a="https://dzone.com/articles/hexagonal-architecture-is-powerful" target="_blank">hexigonal architecture style</a>. 
 
 ## build
 
